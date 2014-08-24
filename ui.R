@@ -9,12 +9,12 @@ defaults <- list(
   dep  = list( Min = 0, Max = 1000, Start = c( 0, 1000 ), Step = 10 ) )
 
 shinyUI( fluidPage(
-  titlePanel( "Recent Earthquake Locations and Magnitudes" ),
+  titlePanel( "EarthquakeApp: Recent Earthquakes Worldwide" ),
   sidebarLayout(
     sidebarPanel(
-      tags$head(
-        tags$style("body {background-color: black; color: red}") ),
-      h4( "Instructions" ),
+#      tags$head(
+#        tags$style("body {background-color: black; color: red}") ),
+      h3( "Instructions" ),
           p( "Filter events by location, magnitude, and depth using the sliders below."),
           p( "Reload the app to reset all sliders."),
           textOutput( 'numEvents' ),
@@ -52,12 +52,16 @@ shinyUI( fluidPage(
           textOutput( 'excludeDepth' ),
         br(),
         p( 'Some events are excluded by multiple criteria.  See notes in main panel.' ),
+
+      p( 'Source code for ',
+         code( 'ui.r' ), 'and', code( 'server.r' ), 'can be found at the GitHub repository: ',
+         a( 'EarthquakeApp', href='https://github.com/DEHDailey/EarthquakeApp' ) ),
       width=3),  ## End of sidebarPanel() call
     
     mainPanel(
-      tags$head(
-        tags$style("body {background-color: black; color: red}") ),
-      p( 'If map does not appear, please wait for data to be retrieved...' ),
+#      tags$head(
+#        tags$style("body {background-color: black; color: red}") ),
+      p( 'If map does not appear, please wait for data to be retrieved (may take a minute or two)...' ),
       textOutput( 'citation' ),
       h5( 'Click on map to show details of events near a selected location.' ),
       plotOutput( 'plot', clickId = 'mapLocation', height='600px' ),
@@ -66,11 +70,14 @@ shinyUI( fluidPage(
       h3( 'Notes:' ),
       p( '* The Shiny server can be slow to draw and re-draw the map.  Please be patient.' ),
       p( '* The USGS data file is updated approximately every 15 minutes. This app uses a stored data file if it cannot access the USGS site.'),
-      p( '* Magnitude is represented by size of plotted point.' ),
-      p( '* Depth is represented by color of plotted point.  Red is closest to the surface.' ),
+      p( '* The USGS data file appears to include data for small quakes (under magnitude 4) only for North America.'),
       p( '* Some depth values in database may be negative.  These events are omitted from the plot.'),
       p( '* Some events may be excluded by multiple criteria.',
          ' Therefore, the total of events excluded may exceed the number of events in the database.' ),
+      p( '* Longitude and latitude sliders must show ranges of at least 5 degrees.'),
+      p( '* Magnitude is represented by size of plotted point.' ),
+      p( '* Depth is represented by color of plotted point.  Red is closest to the surface.' ),
+      
       p( '* As an example, set the longitude range to run from -115 to -110; the latitude range to ',
          'run from 40 to 45; the magnitude range to run from -1 to 10; and the depth range to run ', 
          'from 0 to 1000 km.  The cluster of events in the upper-right corner of the resulting map ',
