@@ -111,7 +111,8 @@ shinyServer( function( input, output, session ){
 #         bg='coral',
          xlim=longRange(),
          ylim=latRange() )
-      map.axes() },
+      map.axes()
+      title( xlab='Longitude', ylab="Latitude" ) },
       error = function( e ) {
 #        par( bg='coral' )
         ## Error handling in case lat/long sliders are compressed to a single value
@@ -119,8 +120,8 @@ shinyServer( function( input, output, session ){
         if( diff( range( input$longSlider )) == 0 ) return()
         
         plot( 0, 0, type='n', # asp=1,
-              xlim=longRange(), xlab='',
-              ylim=latRange(), ylab='',
+              xlim=longRange(), xlab='Longitude',
+              ylim=latRange(), ylab='Latitude',
               sub='No plottable land masses in selected region; using alternate plotting method' )
       }
       )
