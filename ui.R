@@ -53,6 +53,8 @@ shinyUI( fluidPage(
         br(),
         p( 'Some events are excluded by multiple criteria.  See notes in main panel.' ),
 
+      p( a( 'This link', href='http://rpubs.com/DEHDailey/26155' ),
+         'will take you to a short slideshow describing the motivation for this app.' ),
       p( 'Source code for ',
          code( 'ui.r' ), 'and', code( 'server.r' ), 'can be found at the GitHub repository: ',
          a( 'EarthquakeApp', href='https://github.com/DEHDailey/EarthquakeApp' ) ),
